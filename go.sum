@@ -1,0 +1,4 @@
+apigo.cc/go/encoding v1.0.0 h1:NFb658uGqyh8hKKK9EYqQ6ybmcIOslV57Tdqvd0+z6Y=
+apigo.cc/go/encoding v1.0.0/go.mod h1:V5CgT7rBbCxy+uCU20q0ptcNNRSgMtpA8cNOs6r8IeI=
+apigo.cc/go/rand v1.0.2 h1:dJsm607EynJOAoukTvarrUyvLtBF7pi27A99vw2+i78=
+apigo.cc/go/rand v1.0.2/go.mod h1:mZ/4Soa3bk+XvDaqPWJuUe1bfEi4eThBj1XmEAuYxsk=
