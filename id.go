@@ -8,45 +8,50 @@ import (
 	"apigo.cc/go/encoding"
 )
 
-type IdMaker struct {
+const Epoch = 946656000
+
+type IDMaker struct {
 	secCurrent   uint64
 	secIndexNext uint64
 	secIndexLock sync.Mutex
 	Incr         func(sec uint64) uint64
 }
 
-func NewIdMaker(incr func(sec uint64) uint64) *IdMaker {
-	return &IdMaker{Incr: incr, secIndexNext: 1}
+func NewIDMaker(incr func(sec uint64) uint64) *IDMaker {
+	return &IDMaker{Incr: incr, secIndexNext: 1}
 }
 
-var DefaultIdMaker = NewIdMaker(nil)
+var DefaultIDMaker = NewIDMaker(nil)
 
-func MakeId(size int) string {
-	return DefaultIdMaker.Get(size)
+func MakeID(size int) string {
+	return DefaultIDMaker.Get(size)
 }
 
-func (im *IdMaker) defaultIncr(sec uint64) uint64 {
+func (im *IDMaker) defaultIncr(sec uint64) uint64 {
 	im.secIndexLock.Lock()
 	defer im.secIndexLock.Unlock()
+
 	if im.secCurrent == sec {
 		im.secIndexNext++
-	} else {
-		if im.secCurrent == 0 {
-			im.secIndexNext = rand.FastInt(uint64(1000), uint64(1999))
-		} else {
-			im.secIndexNext = 1
-		}
-		im.secCurrent = sec
+		return im.secIndexNext
 	}
+
+	if im.secCurrent == 0 {
+		im.secIndexNext = uint64(rand.FastInt(1000, 1999))
+	} else {
+		im.secIndexNext = 1
+	}
+
+	im.secCurrent = sec
 	return im.secIndexNext
 }
 
-func (im *IdMaker) get(size int, ordered bool, hashToHead bool) string {
+func (im *IDMaker) get(size int, ordered bool, hashToHead bool) string {
 	tm := time.Now()
 
-	nowSec := uint64(tm.Unix() - 946656000)
+	nowSec := uint64(tm.Unix() - Epoch)
 	var n, sec uint64
-	secCapacity := uint64(901356495)
+	const secCapacity = 901356495
 	if nowSec < 11*secCapacity {
 		n = nowSec / secCapacity
 		sec = (nowSec % secCapacity) + 14776336
@@ -94,14 +99,14 @@ func (im *IdMaker) get(size int, ordered bool, hashToHead bool) string {
 	return string(uid)
 }
 
-func (im *IdMaker) Get(size int) string {
+func (im *IDMaker) Get(size int) string {
 	return im.get(size, false, false)
 }
 
-func (im *IdMaker) GetForMysql(size int) string {
+func (im *IDMaker) GetForMysql(size int) string {
 	return im.get(size, true, true)
 }
 
-func (im *IdMaker) GetForPostgreSQL(size int) string {
+func (im *IDMaker) GetForPostgreSQL(size int) string {
 	return im.get(size, true, false)
 }

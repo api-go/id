@@ -5,36 +5,36 @@ import (
 	"apigo.cc/go/id"
 )
 
-func TestMakeId(t *testing.T) {
-	uid := id.MakeId(10)
+func TestMakeID(t *testing.T) {
+	uid := id.MakeID(10)
 	if len(uid) != 10 {
 		t.Errorf("expected length 10, got %d", len(uid))
 	}
 }
 
 func TestGetForMysql(t *testing.T) {
-	uid := id.DefaultIdMaker.GetForMysql(10)
+	uid := id.DefaultIDMaker.GetForMysql(10)
 	if len(uid) != 10 {
 		t.Errorf("expected length 10, got %d", len(uid))
 	}
 }
 
 func TestGetForPostgreSQL(t *testing.T) {
-	uid := id.DefaultIdMaker.GetForPostgreSQL(10)
+	uid := id.DefaultIDMaker.GetForPostgreSQL(10)
 	if len(uid) != 10 {
 		t.Errorf("expected length 10, got %d", len(uid))
 	}
 }
 
-func BenchmarkIdMaker(b *testing.B) {
-	b.Run("MakeId-10", func(b *testing.B) {
+func BenchmarkIDMaker(b *testing.B) {
+	b.Run("MakeID-10", func(b *testing.B) {
 		for i := 0; i < b.N; i++ {
-			_ = id.MakeId(10)
+			_ = id.MakeID(10)
 		}
 	})
 	b.Run("GetForMysql-10", func(b *testing.B) {
 		for i := 0; i < b.N; i++ {
-			_ = id.DefaultIdMaker.GetForMysql(10)
+			_ = id.DefaultIDMaker.GetForMysql(10)
 		}
 	})
 }
