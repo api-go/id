@@ -6,3 +6,7 @@ require (
 	apigo.cc/go/encoding v1.0.4
 	apigo.cc/go/rand v1.0.4
 )
+
+replace apigo.cc/go/encoding => ../encoding
+
+replace apigo.cc/go/rand => ../rand
