@@ -103,10 +103,50 @@ func (im *IDMaker) Get(size int) string {
 	return im.get(size, false, false)
 }
 
+func (im *IDMaker) Get8Bytes4KPerSecond() string {
+	return im.get(8, false, false)
+}
+
+func (im *IDMaker) Get9Bytes90KPerSecond() string {
+	return im.get(9, false, false)
+}
+
+func (im *IDMaker) Get10Bytes14MPerSecond() string {
+	return im.get(10, false, false)
+}
+
+func (im *IDMaker) Get11Bytes900MPerSecond() string {
+	return im.get(11, false, false)
+}
+
+func (im *IDMaker) Get12BytesUltraPerSecond() string {
+	return im.get(12, false, false)
+}
+
 func (im *IDMaker) GetForMysql(size int) string {
 	return im.get(size, true, true)
 }
 
 func (im *IDMaker) GetForPostgreSQL(size int) string {
 	return im.get(size, true, false)
+}
+
+func Get8Bytes4KPerSecond() string {
+	return DefaultIDMaker.Get8Bytes4KPerSecond()
+}
+
+func Get9Bytes90KPerSecond() string {
+	return DefaultIDMaker.Get9Bytes90KPerSecond()
+}
+
+func Get10Bytes14MPerSecond() string {
+	return DefaultIDMaker.Get10Bytes14MPerSecond()
+}
+
+func Get11Bytes900MPerSecond() string {
+	return DefaultIDMaker.Get11Bytes900MPerSecond()
+}
+
+func Get12BytesUltraPerSecond() string {
+	return DefaultIDMaker.Get12BytesUltraPerSecond()
 }

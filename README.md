@@ -25,25 +25,31 @@ ID 结构由 `secTag` (1位) + `sec` (5-6位) + `secIndex` (1-5位) + `padding` 
 ## API Reference
 
 ### 核心生成器
-- `func NewIdMaker(incr func(sec uint64) uint64) *IdMaker`：创建自定义步长的 ID 生成器。
-- `var DefaultIdMaker`：默认全局 ID 生成器（单机模式）。
+- `func NewIDMaker(incr func(sec uint64) uint64) *IDMaker`：创建自定义步长的 ID 生成器。
+- `var DefaultIDMaker`：默认全局 ID 生成器（单机模式）。
 
-### 格式化生成 (推荐作为 PK)
-- `func MakeId(size int) string`：DefaultIdMaker.Get(size) 的别名。
-- `func (im *IdMaker) Get(size int) string`：生成随机唯一ID。
-- `func (im *IdMaker) GetForMysql(size int) string`：MySQL 优化版，自动右旋散列，解决写入热点。
-- `func (im *IdMaker) GetForPostgreSQL(size int) string`：PostgreSQL 优化版，保持时间局部单调。
+### 格式化生成 (语义化方法推荐)
+- `func (im *IDMaker) Get8Bytes4KPerSecond() string`：8 位长度，并发上限 3,844/s。
+- `func (im *IDMaker) Get9Bytes90KPerSecond() string`：9 位长度，并发上限 9 万/s。
+- `func (im *IDMaker) Get10Bytes14MPerSecond() string`：10 位长度，并发上限 1,477 万/s。
+- `func (im *IDMaker) Get11Bytes900MPerSecond() string`：11 位长度，并发上限 9 亿/s。
+- `func (im *IDMaker) Get12BytesUltraPerSecond() string`：12 位长度，支持超越 9 亿并发。
+
+### 数据库专用生成 (推荐作为 PK)
+- `func (im *IDMaker) Get(size int) string`：生成指定长度的随机唯一ID。
+- `func (im *IDMaker) GetForMysql(size int) string`：MySQL 优化版，自动右旋散列，解决写入热点。
+- `func (im *IDMaker) GetForPostgreSQL(size int) string`：PostgreSQL 优化版，保持时间局部单调。
 
 ## 快速开始
 
 ```go
 import "apigo.cc/go/id"
 
-// 生成一个 12 位长度的唯一ID
-newID := id.MakeId(12)
+// 语义化生成示例 (推荐)
+requestId := id.Get10Bytes14MPerSecond()
 
-// 生成一个 10 位长度的 MySQL 友好主键
-newID := id.DefaultIdMaker.GetForMysql(10)
+// 数据库主键生成示例
+userId := id.DefaultIDMaker.GetForMysql(10)
 ```
 
 ## 分布式集群扩展示例
