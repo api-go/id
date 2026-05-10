@@ -3,8 +3,8 @@ module apigo.cc/go/id
 go 1.25.0
 
 require (
-	apigo.cc/go/encoding v1.1.2
-	apigo.cc/go/rand v1.0.6
+	apigo.cc/go/encoding v1.3.0
+	apigo.cc/go/rand v1.3.0
 )
 
-require apigo.cc/go/cast v1.2.10 // indirect
+require apigo.cc/go/cast v1.3.0 // indirect
