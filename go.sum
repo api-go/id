@@ -1,6 +1,6 @@
-apigo.cc/go/cast v1.2.10 h1:wa9/hz6GW6Z+5co6l7LftMn2Eo06WpVHHDCCQphnmH8=
-apigo.cc/go/cast v1.2.10/go.mod h1:lGlwImiOvHxG7buyMWhFzcdvQzmSaoKbmr7bcDfUpHk=
-apigo.cc/go/encoding v1.1.2 h1:reSrLkyYrtZsf4S91XPdyBY2AQpvA43n9q0Q9wz5uJA=
-apigo.cc/go/encoding v1.1.2/go.mod h1:iLuvrYHEK8mLnk8jijx5Sv1tInFreny0yGNBouA1d20=
-apigo.cc/go/rand v1.0.6 h1:p51rkaDrYUdZPIRbQAujZmQelWg2ipAMts33A/tG7QE=
-apigo.cc/go/rand v1.0.6/go.mod h1:mZ/4Soa3bk+XvDaqPWJuUe1bfEi4eThBj1XmEAuYxsk=
+apigo.cc/go/cast v1.3.3 h1:aln5eDR5DZVWVzZ/y5SJh1gQNgWv2sT82I25NaO9g34=
+apigo.cc/go/cast v1.3.3/go.mod h1:lGlwImiOvHxG7buyMWhFzcdvQzmSaoKbmr7bcDfUpHk=
+apigo.cc/go/encoding v1.3.1 h1:y8O58KYAyulkThg1O2ji2BqjnFoSvk42sit9I3z+K7Y=
+apigo.cc/go/encoding v1.3.1/go.mod h1:xAJk5b83VZ31mXMTnyp0dfMoBKfT/AHDn0u+cQfojgY=
+apigo.cc/go/rand v1.3.1 h1:7FvsI6PtQ5XrWER0dTiLVo0p7GIxRidT/TBKhVy93j8=
+apigo.cc/go/rand v1.3.1/go.mod h1:mZ/4Soa3bk+XvDaqPWJuUe1bfEi4eThBj1XmEAuYxsk=
