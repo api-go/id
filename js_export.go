@@ -8,10 +8,10 @@ import (
 
 func init() {
 	jsmod.Register("id", map[string]any{
-		"Make": func(size int, forDB ...string) string {
+		"Make": func(size int, forDB *string) string {
 			dbType := ""
-			if len(forDB) > 0 {
-				dbType = strings.ToLower(forDB[0])
+			if forDB != nil {
+				dbType = strings.ToLower(*forDB)
 			}
 
 			switch dbType {
