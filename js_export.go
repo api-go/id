@@ -1,13 +1,27 @@
 package id
 
-import "apigo.cc/go/jsmod"
+import (
+	"strings"
+
+	"apigo.cc/go/jsmod"
+)
 
 func init() {
 	jsmod.Register("id", map[string]any{
-		"get8Bytes4KPerSecond":    Get8Bytes4KPerSecond,
-		"get9Bytes90KPerSecond":    Get9Bytes90KPerSecond,
-		"get10Bytes14MPerSecond":   Get10Bytes14MPerSecond,
-		"get11Bytes900MPerSecond":  Get11Bytes900MPerSecond,
-		"get12BytesUltraPerSecond": Get12BytesUltraPerSecond,
+		"Make": func(size int, forDB ...string) string {
+			dbType := ""
+			if len(forDB) > 0 {
+				dbType = strings.ToLower(forDB[0])
+			}
+
+			switch dbType {
+			case "mysql":
+				return DefaultIDMaker.GetForMysql(size)
+			case "postgres", "pg", "pgsql":
+				return DefaultIDMaker.GetForPostgreSQL(size)
+			default:
+				return DefaultIDMaker.Get(size)
+			}
+		},
 	})
 }

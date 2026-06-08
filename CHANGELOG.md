@@ -1,5 +1,8 @@
 # Changelog: @go/id
 
+## v1.5.1 (2026-06-08)
+- **JS 极简 API**: 彻底废除 JS 侧冗长难记的 `get8Bytes...` 等方法，统一收敛为极简的 `Make(size int, forDB ...string)`。充分利用了底层 JS Bridge 的零值回退特性，在不填第二个参数时也能安全优雅地工作。
+
 ## [v1.3.2] - 2026-05-30
 
 ### Added
