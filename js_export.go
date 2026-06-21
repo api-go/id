@@ -8,20 +8,22 @@ import (
 
 func init() {
 	jsmod.Register("id", map[string]any{
-		"Make": func(size int, forDB *string) string {
-			dbType := ""
-			if forDB != nil {
-				dbType = strings.ToLower(*forDB)
-			}
-
-			switch dbType {
-			case "mysql":
-				return DefaultIDMaker.GetForMysql(size)
-			case "postgres", "pg", "pgsql":
-				return DefaultIDMaker.GetForPostgreSQL(size)
-			default:
-				return DefaultIDMaker.Get(size)
-			}
-		},
+		"Make": jsMake,
 	})
+}
+
+func jsMake(size int, forDB *string) string {
+	dbType := ""
+	if forDB != nil {
+		dbType = strings.ToLower(*forDB)
+	}
+
+	switch dbType {
+	case "mysql":
+		return DefaultIDMaker.GetForMysql(size)
+	case "postgres", "pg", "pgsql":
+		return DefaultIDMaker.GetForPostgreSQL(size)
+	default:
+		return DefaultIDMaker.Get(size)
+	}
 }
