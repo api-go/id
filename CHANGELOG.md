@@ -1,5 +1,16 @@
 # Changelog: @go/id
 
+## v1.5.6 (2026-06-22)
+- **接口精简与测试逆向对齐 (API Simplification & Decryption Alignment)**:
+  - 弃用并删除了 `FillRand` 的调用，重构为直接调用 `encoding.FillInt`。
+  - 同步修改 `UnhashInt` 单元测试以匹配 `HashInt` 的 2 轮非线性传播混淆，并在 `TestReversibility` 中完美验证了变换的双射性与可逆性。
+
+## v1.5.5 (2026-06-21)
+- **碰撞安全与重排修复 (Entropy Fold & Order Fix)**:
+  - 引入模同余折叠：在非有序模式截断前调用 `intEncoder.FoldInt` 将超长字节以 Base62 同余模加异或折叠，确保高并发下的唯一性熵完全保留在截断范围内，消除了物理截断的局部高碰撞 Bug。
+  - 修复 `ExchangeInt` 就地修改对齐：随着底层 `ExchangeInt` 修复为原地修改，重新激活了有序数据库优化模式（`GetForMysql`/`GetForPostgreSQL`）下对后半段序列号混淆的能力，使得首位分片散列（`hashToHead`）成功防范 B+ 树写入热点。
+  - 自动化回归测试：在 `id_test.go` 中引入了 `TestReversibility`（双射可逆测试）、`TestCollisionRate`（并发碰撞测试）与 `TestCheckHashDiff`（差分诊断），通过严格的回归用例确保后续算法更新安全。
+
 ## v1.5.4 (2026-06-21)
 - **重构与错误堆栈支持**:
   - 重构 `js_export.go`，将 `Make` 匿名包装闭包改为包级具名函数 `jsMake`。

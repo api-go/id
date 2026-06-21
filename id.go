@@ -86,14 +86,9 @@ func (im *IDMaker) get(size int, ordered bool, hashToHead bool) string {
 	uid = append(uid, inSecIndexBytes...)
 	uid = intEncoder.FillInt(uid, size)
 	if !ordered {
-		uid = encoding.ExchangeInt(uid)
-		hashed := encoding.HashInt(uid, nil)
-		uid = make([]byte, 0, size)
-		for i := 0; i < size && i < len(hashed); i++ {
-			uid = append(uid, intEncoder.EncodeInt(uint64(hashed[i]))[0])
-		}
+		uid = encoding.HashInt(encoding.ExchangeInt(uid))
 	} else {
-		encoding.HashInt(encoding.ExchangeInt(uid[secLen+1:]), nil)
+		encoding.HashInt(encoding.ExchangeInt(uid[secLen+1:]))
 		if hashToHead {
 			size = len(uid)
 			lastByte := uid[size-1]
