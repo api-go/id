@@ -8,4 +8,4 @@ require (
 	apigo.cc/go/rand v1.5.3
 )
 
-require apigo.cc/go/cast v1.5.3
+require apigo.cc/go/cast v1.5.3 // indirect

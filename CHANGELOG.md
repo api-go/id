@@ -1,5 +1,8 @@
 # Changelog: @go/id
 
+## v1.5.7 (2026-07-18)
+- **依赖校验修复**: 重新整理模块图并补齐 checksum。
+
 ## v1.5.6 (2026-06-22)
 - **接口精简与测试逆向对齐 (API Simplification & Decryption Alignment)**:
   - 弃用并删除了 `FillRand` 的调用，重构为直接调用 `encoding.FillInt`。
