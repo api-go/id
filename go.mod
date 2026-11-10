@@ -1,14 +1,14 @@
-module apigo.cc/go/id
+module github.com/api-go/id
 
 go 1.25.0
 
 require (
-	apigo.cc/go/encoding v1.5.8
-	apigo.cc/go/jsmod v1.5.4
-	apigo.cc/go/rand v1.5.4
+	github.com/api-go/encoding v1.5.9
+	github.com/api-go/jsmod v1.5.6
+	github.com/api-go/rand v1.5.5
 )
 
 require (
-	apigo.cc/go/cast v1.5.7 // indirect
+	github.com/api-go/cast v1.5.9 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

@@ -43,7 +43,7 @@ ID 结构由 `secTag` (1位) + `sec` (5-6位) + `secIndex` (1-5位) + `padding` 
 ## 快速开始
 
 ```go
-import "apigo.cc/go/id"
+import "github.com/api-go/id"
 
 // 语义化生成示例 (推荐)
 requestId := id.Get10Bytes14MPerSecond()
@@ -59,7 +59,7 @@ userId := id.DefaultIDMaker.GetForMysql(10)
 import (
     "fmt"
     "sync"
-    "apigo.cc/go/id"
+    "github.com/api-go/id"
     "github.com/gomodule/redigo/redis"
 )
 

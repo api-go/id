@@ -3,7 +3,7 @@ package id
 import (
 	"strings"
 
-	"apigo.cc/go/jsmod"
+	"github.com/api-go/jsmod"
 )
 
 func init() {

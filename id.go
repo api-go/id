@@ -1,11 +1,11 @@
 package id
 
 import (
-	"apigo.cc/go/rand"
+	"github.com/api-go/rand"
 	"sync"
 	"time"
 
-	"apigo.cc/go/encoding"
+	"github.com/api-go/encoding"
 )
 
 const Epoch = 946656000

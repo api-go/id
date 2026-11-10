@@ -32,3 +32,13 @@
 - **并发安全**：核心计数器使用 `sync.Mutex` 保护。
 - **碰撞漏洞根治**：通过引入 `FoldInt` 模加折叠机制，彻底消除高位在 `ExchangeInt` 重排与哈希截断时带来的信息丢失问题，高并发下 7~10 位碰撞率完全降为 **0%**。
 - **扩展性**：支持自定义钩子，轻松对接 Redis 等分布式协调服务。
+
+## GitHub migration validation (pending release)
+
+Module paths and internal dependency versions are migrated. Development verification uses GOWORK=off and explicit sibling replacements; remove these replacements before release. See migration validation logs for actual results. Existing unrelated working changes are preserved and require separate review.
+
+API inventory verification: `GOWORK=off go doc` succeeded; output retained in the migration validation directory. Source exports were preserved by the path migration.
+
+## GitHub release verification
+
+GOWORK=off go test -v ./... and go test -bench=. ./... passed using published GitHub dependencies, without local replacements. go mod verify passed.

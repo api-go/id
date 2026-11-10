@@ -1,8 +1,8 @@
 package id_test
 
 import (
-	"apigo.cc/go/encoding"
-	"apigo.cc/go/id"
+	"github.com/api-go/encoding"
+	"github.com/api-go/id"
 	"math"
 	"strings"
 	"testing"
